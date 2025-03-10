@@ -1,9 +1,7 @@
 # Project Description 
 
 ## This is Africa!
-This is Africa is an engaging and educational trivia game designed for players who want to test their knowledge of Africa’s rich history, diverse cultures, geography, and influential figures.
-Players will be presented with three statements—two truths and one lie. The challenge? Spot the lie before time runs out! Each round lasts two minutes, and the player must answer as many questions as possible within the time limit.
-The score updates automatically after each selection, rewarding correct answers and keeping track of progress. Users can choose from multiple difficulty levels, making the game accessible to both beginners and trivia masters.
+This is Africa is an engaging and educational trivia game designed for players who want to test their knowledge of Africa’s rich history, diverse cultures, geography, and influential figures. Players will be presented with three statements—two truths and one lie. The challenge? Spot the lie before time runs out! Each round lasts two minutes, and the player must answer as many questions as possible within the time limit. The score updates automatically after each selection, rewarding correct answers and keeping track of progress. Users can choose from multiple difficulty levels, making the game accessible to both beginners and trivia masters.
 
 
 
@@ -13,7 +11,7 @@ These are the core features:
     - As a user, I want to see a clean and simple game interface so I can easily understand how to play.
     - As a user, I want to see a clear game title and instructions on the home screen, so I know what to do.
     - As a user, I want to start a new game with a button click so I can begin playing.
-2.	 Gameplay Mechanics
+2.	Gameplay Mechanics
     - As a user, I want to see three statements (two truths and one lie) displayed at a time so I can select.
     - As a user, I want to be able to see and select a difficulty level to change the list of statements I receive. 
     - As a user, I want to click on one of the statements to guess which one is the lie.
@@ -47,9 +45,8 @@ These are the core features:
 
 ## Wire Frames
 
-**Initial Landing View**
 
-[temp-Image-FDl3-WO.avif](https://postimg.cc/zHbJc6qV)
+![image](https://i.postimg.cc/brLssfMH/temp-Image-FDl3-WO.avif)
 
 
 
@@ -79,6 +76,7 @@ These are the core features:
         let questions = []
     // Each question will have three statements and one correct answer (the lie).
 
+
 //At the start of the game (Starting Game)
 
     // The score is set to 0.
@@ -99,6 +97,7 @@ These are the core features:
 
 // Advancing to the next question (Next Question)
         function nextQuestion (){}
+    //create a loop function with a nested if statement to select the next question (ForLoop)
 
     // After the player answers a question, the game:
         // Removes the previous question.
@@ -109,6 +108,8 @@ These are the core features:
    
 
 // Ending the Game
+    //Create a function using a forloop to countdown the remaining time
+    //If time is remaining, the user can continue answering the questions  
 
     // The game ends when:
         // The player runs out of time OR
@@ -122,13 +123,13 @@ These are the core features:
 
 ## Timeline - Daily Accountability
 
-| Day        |   | Task                               | Blockers | Notes/ Thoughts |
-|------------|---|------------------------------------|----------|-----------------|
-| Monday     |   | Create and present proposal        |          |                 |
-| Tuesday    |   | Create html, js, css files         |          |                 |
-| Wednesday  |   | Create basic scaffolding           |          |                 |
-| Thursday   |   | Add functionality                  |          |                 |
-| Friday     |   | Add styling                        |          |                 |
-| Saturday   |   | Finalize MVP                       |          |                 |
-| Sunday     |   | Work on stretch goals              |          |                 |
-| Monay      |   | Present Project to class           |          |                 |
+| Day        |   | Task                                          | Blockers | Notes/ Thoughts |
+|------------|---|-----------------------------------------------|----------|-----------------|
+| Monday     |   | Present proposal, create files (Css, Js etc. )|          |                 |
+| Tuesday    |   | Create basic scaffolding / find database      |          |                 |
+| Wednesday  |   | Add functionality / Add styling               |          |                 |
+| Thursday   |   | Work on improving styling and UI              |          |                 |
+| Friday     |   | Finalize MVP                                  |          |                 |
+| Saturday   |   | Share with users to get their feedback        |          |                 |
+| Sunday     |   | Iterate and make improvements from feedback   |          |                 |
+| Monay      |   | Present Project to class                      |          |                 |

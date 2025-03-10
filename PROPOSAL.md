@@ -120,9 +120,7 @@ These are the core features:
         // If the player chooses to play again, the game restarts from the beginning.
 
 
-#### Timeline - Daily Accountability
-
-
+## Timeline - Daily Accountability
 
 | Day        |   | Task                               | Blockers | Notes/ Thoughts |
 |------------|---|------------------------------------|----------|-----------------|

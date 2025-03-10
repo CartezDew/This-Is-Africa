@@ -31,7 +31,7 @@ These are the core features:
     - Implement moving animals to provide an atmosphere in which the user is on a safari and the background changes as the user changes the difficulty levels. Or the background will change every time the user resets the game. 
     - Integrate celebratory animations (such as a confetti effect) when a user correctly guesses the lie to create a more engaging experience.
 3.	Social Features
-    - Integrate social media sharing functionality (e.g., Twitter, Facebook) so users can post their scores and challenge friends.
+    - Integrate social media sharing functionality (e.g., Instagram, TikTok) so users can post their scores and challenge friends.
 4.	 Data Persistence & Personalization
     - Use a database to save player progress, past scores, and selected preferences.
     - Allow users to create a profile with a name and avatar for a more personalized experience.

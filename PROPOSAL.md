@@ -129,6 +129,6 @@ These are the core features:
 | Wednesday  |   | Create basic scaffolding           |          |                 |
 | Thursday   |   | Add functionality                  |          |                 |
 | Friday     |   | Add styling                        |          |                 |
-| Saturday   |   | Finaliza MVP                       |          |                 |
+| Saturday   |   | Finalize MVP                       |          |                 |
 | Sunday     |   | Work on stretch goals              |          |                 |
 | Monay      |   | Present Project to class           |          |                 |

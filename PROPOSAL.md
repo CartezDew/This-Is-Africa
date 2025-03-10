@@ -5,7 +5,8 @@ This is Africa is an engaging and educational trivia game designed for players w
 Players will be presented with three statements—two truths and one lie. The challenge? Spot the lie before time runs out! Each round lasts two minutes, and the player must answer as many questions as possible within the time limit.
 The score updates automatically after each selection, rewarding correct answers and keeping track of progress. Users can choose from multiple difficulty levels, making the game accessible to both beginners and trivia masters.
 
-
+## Wireframes
+![image](https://i.postimg.cc/brLssfMH/temp-Image-FDl3-WO.avif)
 
 ## MVP (Minimum Viable Product) User Stories 
 These are the core features:

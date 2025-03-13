@@ -1,3 +1,25 @@
+//reference buttons
+const messageEl = document.querySelector("#message");
+const playButtonEl = document.querySelector("#play-button");
+const newGameButtonEl = document.querySelector("#new-game-button");
+const africaButtonEl = document.querySelector("#africa-button");
+const rwandaButtonEl = document.querySelector("#rwanda-button");
+const southAfricaButtonEl = document.querySelector("#sa-button");
+const easyButtonEl = document.querySelector("#easy-button");
+const mediumButtonEl = document.querySelector("#medium-button");
+const hardButtonEl = document.querySelector("hard-button");
+const questionDisplayEl = document.querySelector("#question-display");
+
+//variable to store selected category & difficulty
+
+let selectedCategory = null;
+let selectedDifficulty= null;
+
+ //"Let's play"
+
+
+
+
 let score = 0;
 let timeLeft = 90; // 1:30-minute timer
 let currentQuestionIndex = 0;
@@ -507,3 +529,80 @@ function getRandomSAHardQuestion  (){
 
 const randomQuestion = getRandomSAHardQuestion();
 console.log(randomQuestion);
+
+
+//------Buttons Functions----------
+
+// const handlebuttonSelection = (e) => {
+//     const selectedButton = e.target;
+//     const clickedSquareIndex = parseInt(clickedSquare.id);
+  
+//     if (board[clickedSquareIndex] !== "" || !gameActive) {
+//       return;
+//     }
+  
+//     handleCellPlayed(clickedSquare, clickedSquareIndex);
+//     handleResultValidation();
+//   };
+  
+//   const squareEls = document.querySelectorAll(".sqr");
+  
+//   squareEls.forEach((squareEl) => {
+    // squareEl.addEventListener("click", handleSquareClick);
+//   });
+
+
+//--------------Buttons------------
+
+// newGameButtonEl.addEventListener("click", () => {
+//     gameActive = true;
+//     messageEl.innerText = currentPlayerTurn();
+//     document.querySelectorAll(".sqr").forEach((sqr) => (sqr.innerText = ""));
+//   });
+
+//------------Function to get a random trivia question based on the category & difficulty selected---------
+
+function getRandomQuestion() {
+    
+    if (selectedCategory === "africa" && selectedDifficulty === "easy") {
+        return getRandomAfricaEasyQuestion() ;
+    } else if (selectedDifficulty === "medium") {
+            return getRandomAfricaMediumQuestion();
+        }
+    
+    }
+ 
+
+
+function displayQuestion() {
+    const question = getRandomQuestion();
+    if (question) {
+        questionDisplayEl.innerText =  getRandomQuestion;
+        
+        // {
+
+        // };
+    }
+}
+// Event listener for selecting Africa category
+// africaButtonEl.addEventListener("click", () => {
+//     selectedCategory = "africa";
+//     console.log("Africa category selected. Choose difficulty.");
+// });
+
+// Event listener for selecting difficulty level
+// easyButtonEl.addEventListener("click", () => {
+//     if (selectedCategory) {
+//         selectedDifficulty = "easy";
+//         console.log("Easy difficulty selected.");
+//         displayQuestion();
+//     }
+// });
+
+// mediumButtonEl.addEventListener("click", () => {
+//     if (selectedCategory) {
+//         selectedDifficulty = "medium";
+//         console.log("Medium difficulty selected.");
+//         displayQuestion();
+//     }
+// });

@@ -52,8 +52,8 @@ let africaMediumQuestions = {
         "Zambia and Zimbabwe share one of the world's largest waterfalls, Victoria Falls.",
         "The cheetah, found in Africa, is the fastest land animal",
         "Ethiopia is one of the few African countries that was never colonized.",
-        "The show features cast members from multiple African countries, including South Africa, Nigeria, and Tanzania",
-        "The show gives insight into the luxurious lifestyles of African entertainers and influencers",
+        "The Netflix series, 'Young, Famous & African', features cast members from multiple African countries, including South Africa, Nigeria, and Tanzania",
+        "The Netflix series, 'Young, Famous & African', gives insight into the luxurious lifestyles of African entertainers and influencers",
         "As of 2024, Cairo Egypt is the largest populated City in Africa.",
         "Djibouti has one of the saltiest bodies of water in the world, Lake Assal.",
         "The DRC was formerly known as Zaire and underwent a complex history, including colonial rule by Belgium, independence in 1960, and subsequent name changes.",
@@ -244,8 +244,8 @@ let southAfricaMediumQuestions = {
         "Afrikaans is derived from Dutch and is one of the official languages.",
         "South Africa has a literacy rate of over 90%.",
         "'Born a Crime: Stories' from a South African Childhood is an autobiographical comedy book written by South African comedian Trevor Noah",
-        "The show features cast members from multiple African countries, including South Africa, Nigeria, and Tanzania",
-        "The show gives insight into the luxurious lifestyles of African entertainers and influencers",
+        "The Netflix series, 'Young, Famous & African', features cast members from multiple African countries, including South Africa, Nigeria, and Tanzania",
+        "The Netflix series, 'Young, Famous & African', gives insight into the luxurious lifestyles of African entertainers and influencers",
     ],
     lie: [
         "South Africa is still developing nuclear weapons as part of its defense strategy.",
@@ -395,5 +395,115 @@ function getRandomAfricaMediumQuestion  (){
     };
 };   
 
-const randomQuestion = getRandomAfricaMediumQuestion();
+function getRandomRwandaEasyQuestion (){
+    
+    let selectedTruths= [];
+    //Loop twice to get two unique random truths
+    for (let i= 0; i <2; i++) {
+        
+        let randomIndex = Math.floor(Math.random() * rwandaEasyQuestions.true.length);
+        let truth = rwandaEasyQuestions.true.splice(randomIndex, 1)[0]; //extract the actual string
+        selectedTruths.push(truth); //push two truth strings into the new array
+    };
+    
+    const randomIndex = Math.floor(Math.random() * rwandaEasyQuestions.lie.length);
+    const randomLie = rwandaEasyQuestions.lie.splice(randomIndex, 1)[0];
+    const correctAnswer = rwandaEasyQuestions.correctAnswer.splice(randomIndex, 1)[0];
+    
+    return {
+        truth: selectedTruths,
+        lie: randomLie,
+        explanation: correctAnswer
+    };
+};
+
+function getRandomRwandaMediumQuestion  (){
+
+    let selectedTruths= [];
+    //Loop twice to get two unique random truths
+    for (let i= 0; i <2; i++) {
+
+        let randomIndex = Math.floor(Math.random() * rwandaMediumQuestions.true.length);
+        let truth = rwandaMediumQuestions.true.splice(randomIndex, 1)[0]; //extract the actual string
+        selectedTruths.push(truth); //push two truth strings into the new array
+    };
+    
+    const randomIndex = Math.floor(Math.random() *rwandaMediumQuestions.lie.length);
+    const randomLie = rwandaMediumQuestions.lie.splice(randomIndex, 1)[0];
+    const correctAnswer = rwandaMediumQuestions.correctAnswer.splice(randomIndex, 1)[0];
+    
+    return {
+        truth: selectedTruths,
+        lie: randomLie,
+        explanation: correctAnswer
+    };
+};   
+
+function getSAEasyQuestion (){
+    
+    let selectedTruths= [];
+    //Loop twice to get two unique random truths
+    for (let i= 0; i <2; i++) {
+        
+        let randomIndex = Math.floor(Math.random() * southAfricaEasyQuestions.true.length);
+        let truth = southAfricaEasyQuestions.true.splice(randomIndex, 1)[0]; //extract the actual string
+        selectedTruths.push(truth); //push two truth strings into the new array
+    };
+    
+    const randomIndex = Math.floor(Math.random() * southAfricaEasyQuestions.lie.length);
+    const randomLie = southAfricaEasyQuestions.lie.splice(randomIndex, 1)[0];
+    const correctAnswer = southAfricaEasyQuestions.correctAnswer.splice(randomIndex, 1)[0];
+    
+    return {
+        truth: selectedTruths,
+        lie: randomLie,
+        explanation: correctAnswer
+    };
+};
+
+function getRandomSAMediumQuestion  (){
+
+    let selectedTruths= [];
+    //Loop twice to get two unique random truths
+    for (let i= 0; i <2; i++) {
+
+        let randomIndex = Math.floor(Math.random() * southAfricaMediumQuestions.true.length);
+        let truth = southAfricaMediumQuestions.true.splice(randomIndex, 1)[0]; //extract the actual string
+        selectedTruths.push(truth); //push two truth strings into the new array
+    };
+    
+    const randomIndex = Math.floor(Math.random() *southAfricaMediumQuestions.lie.length);
+    const randomLie = southAfricaMediumQuestions.lie.splice(randomIndex, 1)[0];
+    const correctAnswer = southAfricaMediumQuestions.correctAnswer.splice(randomIndex, 1)[0];
+    
+    return {
+        truth: selectedTruths,
+        lie: randomLie,
+        explanation: correctAnswer
+    };
+}; 
+
+function getRandomSAHardQuestion  (){
+
+    let selectedTruths= [];
+    //Loop twice to get two unique random truths
+    for (let i= 0; i <2; i++) {
+
+        let randomIndex = Math.floor(Math.random() * southAfricaHardQuestions.true.length);
+        let truth = southAfricaHardQuestions.true.splice(randomIndex, 1)[0]; //extract the actual string
+        selectedTruths.push(truth); //push two truth strings into the new array
+    };
+    
+    const randomIndex = Math.floor(Math.random() * southAfricaHardQuestions.lie.length);
+    const randomLie = southAfricaHardQuestions.lie.splice(randomIndex, 1)[0];
+    const correctAnswer = southAfricaHardQuestions.correctAnswer.splice(randomIndex, 1)[0];
+    
+    return {
+        truth: selectedTruths,
+        lie: randomLie,
+        explanation: correctAnswer
+    };
+}; 
+
+const randomQuestion = getRandomSAHardQuestion();
 console.log(randomQuestion);

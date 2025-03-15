@@ -11,6 +11,7 @@ const hardButtonEl = document.querySelector("hard-button");
 const questionDisplayEl = document.querySelector("#question-display");
 const categoryButtons = document.querySelectorAll (".category-button");
 const difficultyButtons = document.querySelectorAll (".difficulty-button");
+// TODO: grab statements container
 
 //variable to store selected category & difficulty
 
@@ -463,7 +464,7 @@ function getRandomRwandaMediumQuestion  (){
     };
 };   
 
-function getSAEasyQuestion (){
+function getRandomSAEasyQuestion (){
     
     let selectedTruths= [];
     //Loop twice to get two unique random truths
@@ -500,6 +501,7 @@ function getRandomSAMediumQuestion  (){
     const randomLie = southAfricaMediumQuestions.lie.splice(randomIndex, 1)[0];
     const correctAnswer = southAfricaMediumQuestions.correctAnswer.splice(randomIndex, 1)[0];
     
+    // This object structure is good for the program, but it shouldn't be how the user sees it
     return {
         truth: selectedTruths,
         lie: randomLie,
@@ -567,6 +569,9 @@ console.log(randomQuestion);
 
 //----------Event Listeners-----------------
 
+// TODO: Add event listener on the statements-container div(whatever its var name is) to make it clickable
+// In the event listener, the p tag you click, should compare against correct question.explanation OR question.truth
+
 categoryButtons.forEach(button => {
     button.addEventListener("click", (event) => {
         selectedCategory = event.target.dataset.category; // Get category from data attribute
@@ -609,10 +614,17 @@ function displayQuestion(category, difficulty) {
         if (difficulty === "easy-button") question = getRandomRwandaEasyQuestion();
         if (difficulty === "medium-button") question = getRandomRwandaMediumQuestion();
     }
+    else if (category === "South Africa") {
+    if (difficulty === "easy-button") question = getRandomSAEasyQuestion();
+    if (difficulty === "medium-button") question = getRandomSAMediumQuestion();
+    if (difficulty === "hard-button") question = getRandomSAHardQuestion();
+    };
 
     // Display the question if found
     if (question) {
-        document.querySelector("#message").innerHTML = `
+        // TODO: Once you grab statements container up top, use that variable to do the .innerHTML 
+        // TODO: Fix how the p tags are being populated, right now you're giving the answers away
+        document.querySelector(".statements-container").innerHTML = `
             <p><strong>Truths:</strong> ${question.truth.join(" | ")}</p>
             <p><strong>Lie:</strong> ${question.lie}</p>
             <p><strong>Explanation:</strong> ${question.explanation}</p>

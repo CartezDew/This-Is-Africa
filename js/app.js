@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {  
+    document.getElementById("question-message").style.display = "none"; // Hide it on page load
 
 //reference buttons
 const messageEl = document.querySelector("#message");
@@ -551,6 +552,11 @@ function startTimer() {
             countdownEl.textContent = "⏳ Game Over!";
             alert("Game Over! Select a category and play again.");
 
+            // Hide "Which statement is a lie?" message
+            document.getElementById("question-message").textContent = "";
+            document.getElementById("question-message").style.display = "none"; // Hide it
+
+
             // Reset game state
             selectedCategory = null;
             selectedDifficulty = null;
@@ -593,6 +599,10 @@ function updateGameMessage() {
 
         // Update message text
         messageEl.textContent = `You are playing ${categoryDisplayName} | ${difficultyDisplayName} level`;
+
+       // Display "Which statement is a lie?"
+       document.getElementById("question-message").textContent = "Which statement is a lie?";
+       document.getElementById("question-message").style.display = "block"; // Make it visible
     }
 }
 //------Buttons Functions----------
@@ -710,6 +720,16 @@ function getRandomQuestion(category, difficulty) {
         explanation: explanation
     };
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    const questionMessageEl = document.getElementById("question-message");
+
+    if (questionMessageEl) {
+        questionMessageEl.style.display = "none"; // ✅ Hide it safely
+    } else {
+        console.error("❌ Error: Element #question-message not found.");
+    }
+});
 
 // Function to display a question
 function displayQuestion(category, difficulty) {

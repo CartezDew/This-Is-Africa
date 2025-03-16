@@ -95,3 +95,10 @@ body {
     border-radius: 5px;
     border: 2px solid black;
 }
+
+#question-message {
+  display: none;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
+}

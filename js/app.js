@@ -1,3 +1,5 @@
+document.addEventListener("DOMContentLoaded", () => {  
+
 //reference buttons
 const messageEl = document.querySelector("#message");
 const playButtonEl = document.querySelector("#play-button");
@@ -13,6 +15,8 @@ const categoryButtons = document.querySelectorAll (".category-button");
 const difficultyButtons = document.querySelectorAll (".difficulty-button");
 const statementsContainerEl = document.querySelector(".statements-container");
 const nextButtonEl = document.querySelector("#next-button");
+const timerEl = document.querySelector("#timer");
+const countdownEl = document.getElementById("countdown"); 
 
 //variables stored
 
@@ -20,9 +24,10 @@ let selectedCategory = null
 let selectedDifficulty= null
 let currentQuestion = null;
 let score = 0;
-let timeLeft = 90; // 1:30-minute timer
 let currentQuestionIndex = 0;
 let difficulty = "medium"; // Default difficulty
+let timerInterval; // Store timer interval globally
+let timeLeft = 60; // Default time
 
 // Array of questions (each question is an object with statements and correct answer)
 let africaEasyQuestions = {
@@ -530,10 +535,66 @@ function getRandomSAHardQuestion  (){
 const randomQuestion = getRandomSAHardQuestion();
 console.log(randomQuestion);
 
+function startTimer() {
+    clearInterval(timerInterval); // Reset any existing timer
+    timeLeft = 60; // Reset to 60 seconds
 
+    updateCountdownDisplay(); // Initial update
 
+    timerInterval = setInterval(() => {
+        timeLeft--;
+        updateCountdownDisplay();
 
+        // ⏳ If timer reaches 0, stop and show "Game Over"
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            countdownEl.textContent = "⏳ Game Over!";
+            alert("Game Over! Select a category and play again.");
 
+            // Reset game state
+            selectedCategory = null;
+            selectedDifficulty = null;
+            currentQuestion = null;
+
+            // Hide statements and reset difficulty selection
+            statementsContainerEl.innerHTML = "<p>Select a category to start a new game.</p>";
+            difficultyButtons.forEach(btn => btn.classList.remove("selected"));
+
+            // Hide the Next button
+            nextButtonEl.style.display = "none";
+        }
+    }, 1000); // Update every second
+}
+
+function updateCountdownDisplay() {
+    if (!countdownEl) {
+        console.error("❌ Error: countdownEl is null or not found.");
+        return;
+    }
+
+    const minutes = Math.floor(timeLeft / 60);
+    let seconds = timeLeft % 60;
+
+    // Format seconds to always show 2 digits
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+    countdownEl.textContent = `⏳ Time Remaining: ${minutes}:${seconds}`;
+}
+
+function updateGameMessage() {
+    if (selectedCategory && selectedDifficulty) {
+        // Convert category to proper display format
+        let categoryDisplayName = selectedCategory === "sa" ? "South Africa" :
+                                  selectedCategory === "africa" ? "Africa" :
+                                  selectedCategory === "rwanda" ? "Rwanda" : selectedCategory;
+
+        // Convert difficulty to proper format (capitalize first letter only)
+        let difficultyDisplayName = selectedDifficulty.charAt(0).toUpperCase() + selectedDifficulty.slice(1).toLowerCase();
+
+        // Update message text
+        messageEl.textContent = `You are playing ${categoryDisplayName} | ${difficultyDisplayName} level`;
+    }
+}
 //------Buttons Functions----------
 
 // const handlebuttonSelection = (e) => {
@@ -571,33 +632,39 @@ console.log(randomQuestion);
 // Event Listeners for category selection
 categoryButtons.forEach(button => {
     button.addEventListener("click", (event) => {
-        selectedCategory = event.target.dataset.category; // Ensure dataset is used correctly
+        selectedCategory = event.target.dataset.category; // Get the selected category
         console.log(`✅ Category selected: ${selectedCategory}`);
-        
+
         // Highlight selected category
         categoryButtons.forEach(btn => btn.classList.remove("selected"));
         event.target.classList.add("selected");
+
+        // ✅ Update message if difficulty is already selected
+        updateGameMessage();
     });
 });
-
 // Event Listeners for difficulty selection
 difficultyButtons.forEach(button => {
     button.addEventListener("click", (event) => {
         if (!selectedCategory) {
-            console.error("❌ Error: Select a category first.");
-            alert("Please select a category first."); // Display alert for better UX
+            alert("Please select a category first.");
             return;
         }
 
-        selectedDifficulty = event.target.dataset.difficulty; // Use dataset attribute
+        selectedDifficulty = event.target.dataset.difficulty;
         console.log(`✅ Difficulty selected: ${selectedDifficulty}`);
 
-        // Highlight selected difficulty
         difficultyButtons.forEach(btn => btn.classList.remove("selected"));
         event.target.classList.add("selected");
 
-        // Display the question
+        // ✅ Start timer when difficulty is chosen
+        startTimer();
+
+        // ✅ Display the question
         displayQuestion(selectedCategory, selectedDifficulty);
+
+        // ✅ Update message
+        updateGameMessage();
     });
 });
 
@@ -707,5 +774,7 @@ nextButtonEl.addEventListener("click", () => {
 
     // Hide the Next button again
     nextButtonEl.style.display = "none";
+});
+
 });
 

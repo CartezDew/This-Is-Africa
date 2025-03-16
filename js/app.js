@@ -7,22 +7,17 @@ const rwandaButtonEl = document.querySelector("#rwanda-button");
 const southAfricaButtonEl = document.querySelector("#sa-button");
 const easyButtonEl = document.querySelector("#easy-button");
 const mediumButtonEl = document.querySelector("#medium-button");
-const hardButtonEl = document.querySelector("hard-button");
+const hardButtonEl = document.querySelector("#hard-button");
 const questionDisplayEl = document.querySelector("#question-display");
 const categoryButtons = document.querySelectorAll (".category-button");
 const difficultyButtons = document.querySelectorAll (".difficulty-button");
-// TODO: grab statements container
+const statementsContainerEl = document.querySelector(".statements-container");
 
-//variable to store selected category & difficulty
+//variables stored
 
 let selectedCategory = null
 let selectedDifficulty= null
-
- //"Let's play"
-
-
-
-
+let currentQuestion = null;
 let score = 0;
 let timeLeft = 90; // 1:30-minute timer
 let currentQuestionIndex = 0;
@@ -570,113 +565,129 @@ console.log(randomQuestion);
 //----------Event Listeners-----------------
 
 // TODO: Add event listener on the statements-container div(whatever its var name is) to make it clickable
-// In the event listener, the p tag you click, should compare against correct question.explanation OR question.truth
 
+
+// Event Listeners for category selection
 categoryButtons.forEach(button => {
     button.addEventListener("click", (event) => {
-        selectedCategory = event.target.dataset.category; // Get category from data attribute
-        console.log(`Category selected: ${selectedCategory}`);
-
-        if (selectedCategory === "africa-button") {
-            console.log("Africa category selected. Choose difficulty.");
-        } else if (selectedCategory === "rwanda") {
-            console.log("Rwanda category selected. Choose difficulty.");
-        } else if (selectedCategory === "sa-button") {
-            console.log("South Africa category selected. Choose difficulty.");
-        }
+        selectedCategory = event.target.dataset.category; // Ensure dataset is used correctly
+        console.log(`✅ Category selected: ${selectedCategory}`);
+        
+        // Highlight selected category
+        categoryButtons.forEach(btn => btn.classList.remove("selected"));
+        event.target.classList.add("selected");
     });
 });
 
-// Add event listener to each difficulty button
+// Event Listeners for difficulty selection
 difficultyButtons.forEach(button => {
     button.addEventListener("click", (event) => {
         if (!selectedCategory) {
-            console.log("Please select a category first.");
+            console.error("❌ Error: Select a category first.");
+            alert("Please select a category first."); // Display alert for better UX
             return;
         }
 
-        selectedDifficulty = event.target.dataset.category; // Get difficulty from data attribute
-        console.log(`Difficulty selected: ${selectedDifficulty}`);
+        selectedDifficulty = event.target.dataset.difficulty; // Use dataset attribute
+        console.log(`✅ Difficulty selected: ${selectedDifficulty}`);
 
-        // Example function to display a random question
+        // Highlight selected difficulty
+        difficultyButtons.forEach(btn => btn.classList.remove("selected"));
+        event.target.classList.add("selected");
+
+        // Display the question
         displayQuestion(selectedCategory, selectedDifficulty);
     });
 });
 
-// Function to display a question based on selected category & difficulty
-function displayQuestion(category, difficulty) {
-    let question;
+// Function to get a random question based on category and difficulty
+function getRandomQuestion(category, difficulty) {
+    let questionSet = null;
 
-    if (category === "africa-button") {
-        if (difficulty === "easy-button") question = getRandomAfricaEasyQuestion();
-        if (difficulty === "medium-button") question = getRandomAfricaMediumQuestion();
+    if (category === "africa") {
+        if (difficulty === "easy") questionSet = africaEasyQuestions;
+        if (difficulty === "medium") questionSet = africaMediumQuestions;
     } else if (category === "rwanda") {
-        if (difficulty === "easy-button") question = getRandomRwandaEasyQuestion();
-        if (difficulty === "medium-button") question = getRandomRwandaMediumQuestion();
+        if (difficulty === "easy") questionSet = rwandaEasyQuestions;
+        if (difficulty === "medium") questionSet = rwandaMediumQuestions;
+    } else if (category === "sa") {
+        if (difficulty === "easy") questionSet = southAfricaEasyQuestions;
+        if (difficulty === "medium") questionSet = southAfricaMediumQuestions;
+        if (difficulty === "hard") questionSet = southAfricaHardQuestions;
     }
-    else if (category === "South Africa") {
-    if (difficulty === "easy-button") question = getRandomSAEasyQuestion();
-    if (difficulty === "medium-button") question = getRandomSAMediumQuestion();
-    if (difficulty === "hard-button") question = getRandomSAHardQuestion();
-    };
 
-    // Display the question if found
-    if (question) {
-        // TODO: Once you grab statements container up top, use that variable to do the .innerHTML 
-        // TODO: Fix how the p tags are being populated, right now you're giving the answers away
-        document.querySelector(".statements-container").innerHTML = `
-            <p><strong>Truths:</strong> ${question.truth.join(" | ")}</p>
-            <p><strong>Lie:</strong> ${question.lie}</p>
-            <p><strong>Explanation:</strong> ${question.explanation}</p>
-        `;
+    if (!questionSet) {
+        console.error("❌ Error: No valid question set found.");
+        return null;
     }
+
+    // Select two random truths
+    let truths = [...questionSet.true]; // Copy array to avoid modifying original
+    let selectedTruths = [];
+    for (let i = 0; i < 2; i++) {
+        let randomIndex = Math.floor(Math.random() * truths.length);
+        selectedTruths.push(truths.splice(randomIndex, 1)[0]);
+    }
+
+    // Select one random lie
+    let lieIndex = Math.floor(Math.random() * questionSet.lie.length);
+    let selectedLie = questionSet.lie[lieIndex];
+
+    // Get corresponding explanation
+    let explanation = questionSet.correctAnswer[lieIndex];
+
+    return {
+        truth: selectedTruths,
+        lie: selectedLie,
+        explanation: explanation
+    };
 }
 
-//     addEventListener("click", (e) => {
-//     const selectedCategory = e.target;
-// console.log(selectedCategory)
-//     if (selectedCategory = "africa")
-//     console.log("Africa category selected. Choose difficulty.");
-// });
+// Function to display a question
+function displayQuestion(category, difficulty) {
+    let question = getRandomQuestion(category, difficulty);
+    if (!question) {
+        console.error("❌ Error: No question retrieved.");
+        return;
+    }
 
-// difficultyButtons.addEventListener("click", (e)=>{
-//     const selectedDifficulty = e.target
-//     console.log(selectedDifficulty)
-// })
+    currentQuestion = question; // Store globally for reference in event listeners
 
-// // Event listener for selecting difficulty level
-// easyButtonEl.addEventListener("click", () => {
-//     if (selectedCategory) {
-//         selectedDifficulty = "easy";
-//         console.log("Easy difficulty selected.");
-//         displayQuestion();
-//     }
-// });
+    // Shuffle and display statements
+    let statements = [...question.truth, question.lie].sort(() => Math.random() - 0.5);
 
-// mediumButtonEl.addEventListener("click", () => {
-//     if (selectedCategory) {
-//         selectedDifficulty = "medium";
-//         console.log("Medium difficulty selected.");
-//         displayQuestion();
-//     }
-// // });
+    statementsContainerEl.innerHTML = `
+      <p class="statement">1: ${statements[0]}</p>
+      <hr>
+      <p class="statement">2: ${statements[1]}</p>
+      <hr>
+      <p class="statement">3: ${statements[2]}</p>
+    `;
+}
 
-// //------------Function to get a random trivia question based on the category & difficulty selected---------
+// Handle clicking on a statement
+statementsContainerEl.addEventListener("click", (event) => {
+    if (!currentQuestion) {
+        console.error("❌ Error: No question available.");
+        return;
+    }
 
-// function getRandomQuestion() {
+    if (event.target.tagName === "P") {
+        const selectedText = event.target.textContent.trim().replace(/^\d+:\s*/, "");
 
-//     if (selectedCategory === "africa" && selectedDifficulty === "easy") {
-//         return getRandomAfricaEasyQuestion() ;
-//     } else if (selectedDifficulty === "medium") {
-//             return getRandomAfricaMediumQuestion();
-//         }
-    
-//     }
- 
-
-
-// function displayQuestion() {
-//     const question = getRandomQuestion();
-//     if (question) {
-        // questionDisplayEl.innerText =  getRandomQuestion;
-// });
+        if (currentQuestion.truth.includes(selectedText)) {
+            event.target.style.color = "green";
+            event.target.innerHTML += " ✅ Correct!";
+        } else if (selectedText === currentQuestion.lie) {
+            event.target.style.color = "red";
+            event.target.innerHTML += " ❌ Wrong!";
+            
+            // Show correct explanation
+            const explanationEl = document.createElement("p");
+            explanationEl.textContent = `💡This is untrue! ${currentQuestion.explanation}`;
+            explanationEl.style.color = "blue";
+            explanationEl.style.marginTop = "10px";
+            statementsContainerEl.appendChild(explanationEl);
+        }
+    }
+});

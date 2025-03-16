@@ -12,6 +12,7 @@ const questionDisplayEl = document.querySelector("#question-display");
 const categoryButtons = document.querySelectorAll (".category-button");
 const difficultyButtons = document.querySelectorAll (".difficulty-button");
 const statementsContainerEl = document.querySelector(".statements-container");
+const nextButtonEl = document.querySelector("#next-button");
 
 //variables stored
 
@@ -689,5 +690,22 @@ statementsContainerEl.addEventListener("click", (event) => {
             explanationEl.style.marginTop = "10px";
             statementsContainerEl.appendChild(explanationEl);
         }
+
+        // ✅ Show the Next Button
+        nextButtonEl.style.display = "block";
     }
 });
+
+nextButtonEl.addEventListener("click", () => {
+    if (!selectedCategory || !selectedDifficulty) {
+        console.error("Error: Category or difficulty not selected.");
+        return;
+    }
+
+    // Load a new question
+    displayQuestion(selectedCategory, selectedDifficulty);
+
+    // Hide the Next button again
+    nextButtonEl.style.display = "none";
+});
+

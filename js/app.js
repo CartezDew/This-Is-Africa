@@ -18,8 +18,9 @@ const timerEl = document.querySelector("#timer");
 const countdownEl = document.getElementById("countdown"); 
 const selectionMessageEl = document.getElementById("selection-message"); // Message to select difficulty
 const categoryButtons = document.querySelectorAll(".category-button");
-    const difficultyContainer = document.getElementById("difficulty-container");
-    const difficultyButtons = document.querySelectorAll(".difficulty-button");
+const difficultyContainer = document.getElementById("difficulty-container");
+const difficultyButtons = document.querySelectorAll(".difficulty-button");
+const scoreEl = document.getElementById("score"); // Score element reference   
    
 
 //variables stored
@@ -28,8 +29,8 @@ let selectedCategory = null
 let selectedDifficulty= null
 let currentQuestion = null;
 let score = 0;
+let totalChoices = 0; // Track total questions attempted
 let currentQuestionIndex = 0;
-let difficulty = "medium"; // Default difficulty
 let timerInterval; // Store timer interval globally
 let timeLeft = 60; // Default time
 
@@ -539,55 +540,50 @@ function getRandomSAHardQuestion  (){
 const randomQuestion = getRandomSAHardQuestion();
 console.log(randomQuestion);
 
-function startTimer() {
-    clearInterval(timerInterval); // Reset any existing timer
-    timeLeft = 60; // Reset to 60 seconds
-
-    updateCountdownDisplay(); // Initial update
-
-    timerInterval = setInterval(() => {
-        timeLeft--;
-        updateCountdownDisplay();
-
-        // ⏳ If timer reaches 0, stop and show "Game Over"
-        if (timeLeft <= 0) {
-            clearInterval(timerInterval);
-            countdownEl.textContent = "⏳ Game Over!";
-            alert("Game Over! Select a category and play again.");
-
-            // Hide "Which statement is a lie?" message
-            document.getElementById("question-message").textContent = "";
-            document.getElementById("question-message").style.display = "none"; // Hide it
-
-
-            // Reset game state
-            selectedCategory = null;
-            selectedDifficulty = null;
-            currentQuestion = null;
-
-            // Hide statements and reset difficulty selection
-            statementsContainerEl.innerHTML = "<p>Select a category to start a new game.</p>";
-            difficultyButtons.forEach(btn => btn.classList.remove("selected"));
-
-            // Hide the Next button
-            nextButtonEl.style.display = "none";
-        }
-    }, 1000); // Update every second
-}
-
 function updateCountdownDisplay() {
     if (!countdownEl) {
-        console.error("❌ Error: countdownEl is null or not found.");
+        console.error("Error: countdownEl is null or not found.");
         return;
     }
 
     const minutes = Math.floor(timeLeft / 60);
     let seconds = timeLeft % 60;
 
-    // Format seconds to always show 2 digits
+   
     seconds = seconds < 10 ? "0" + seconds : seconds;
 
     countdownEl.textContent = `⏳ Time Remaining: ${minutes}:${seconds}`;
+}
+
+function startTimer() {
+    clearInterval(timerInterval); 
+    timeLeft = 60;
+    score = 0; // Reset score at the start of a new game
+    totalChoices = 0; // Reset total choices
+    scoreEl.textContent = "0"; // Update UI
+
+    updateCountdownDisplay();
+    
+    timerInterval = setInterval(() => {
+        timeLeft--;
+        updateCountdownDisplay();
+
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            countdownEl.textContent = "⏳ Game Over!";
+            alert(`Game Over! You got ${score} out of ${totalChoices} correct.`);
+
+            // Reset game state
+            selectedCategory = null;
+            selectedDifficulty = null;
+            currentQuestion = null;
+
+            statementsContainerEl.innerHTML = "<p>Select a category to start a new game.</p>";
+            difficultyButtons.forEach(btn => btn.classList.remove("selected"));
+
+            nextButtonEl.style.display = "none";
+        }
+    }, 1000);
 }
 
 function updateGameMessage() {
@@ -601,58 +597,25 @@ function updateGameMessage() {
         let difficultyDisplayName = selectedDifficulty.charAt(0).toUpperCase() + selectedDifficulty.slice(1).toLowerCase();
 
         // Update message text
-        messageEl.textContent = `You are playing ${categoryDisplayName} | ${difficultyDisplayName} level`;
+        messageEl.textContent = `You are playing "${categoryDisplayName}" | ${difficultyDisplayName} level`;
 
        // Display "Which statement is a lie?"
        document.getElementById("question-message").textContent = "Which statement is a lie?";
        document.getElementById("question-message").style.display = "block"; // Make it visible
     }
 }
-//------Buttons Functions----------
-
-// const handlebuttonSelection = (e) => {
-//     const selectedButton = e.target;
-//     const clickedSquareIndex = parseInt(clickedSquare.id);
-  
-//     if (board[clickedSquareIndex] !== "" || !gameActive) {
-//       return;
-//     }
-  
-//     handleCellPlayed(clickedSquare, clickedSquareIndex);
-//     handleResultValidation();
-//   };
-  
-//   const squareEls = document.querySelectorAll(".sqr");
-  
-//   squareEls.forEach((squareEl) => {
-    // squareEl.addEventListener("click", handleSquareClick);
-//   });
-
-
-//--------------Buttons------------
-
-// newGameButtonEl.addEventListener("click", () => {
-//     gameActive = true;
-//     messageEl.innerText = currentPlayerTurn();
-//     document.querySelectorAll(".sqr").forEach((sqr) => (sqr.innerText = ""));
-//   });
-
-//----------Event Listeners-----------------
-
-// TODO: Add event listener on the statements-container div(whatever its var name is) to make it clickable
-
 
 // Event Listeners for category selection
 categoryButtons.forEach(button => {
     button.addEventListener("click", (event) => {
         selectedCategory = event.target.dataset.category; // Get the selected category
-        console.log(`✅ Category selected: ${selectedCategory}`);
+        console.log(`Category selected: ${selectedCategory}`);
 
         // Highlight selected category
         categoryButtons.forEach(btn => btn.classList.remove("selected"));
         event.target.classList.add("selected");
 
-        // ✅ Update message if difficulty is already selected
+        // Update message if difficulty is already selected
         updateGameMessage();
     });
 });
@@ -665,7 +628,7 @@ difficultyButtons.forEach(button => {
         }
 
         selectedDifficulty = event.target.dataset.difficulty;
-        console.log(`✅ Difficulty selected: ${selectedDifficulty}`);
+        console.log(`Difficulty selected: ${selectedDifficulty}`);
 
         // Remove previous selection highlights
         difficultyButtons.forEach(btn => btn.classList.remove("selected"));
@@ -675,13 +638,13 @@ difficultyButtons.forEach(button => {
 
         startTimer();
 
-        // ✅ Hide the selection message after difficulty is chosen
+        // Hide the selection message after difficulty is chosen
         selectionMessageEl.style.display = "none";
 
-        // ✅ Display the question
+        // Display the question
         displayQuestion(selectedCategory, selectedDifficulty);
 
-        // ✅ Update message
+        // Update message
         updateGameMessage();
     });
 });
@@ -703,7 +666,7 @@ function getRandomQuestion(category, difficulty) {
     }
 
     if (!questionSet) {
-        console.error("❌ Error: No valid question set found.");
+        console.error("Error: No valid question set found.");
         return null;
     }
 
@@ -733,9 +696,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const questionMessageEl = document.getElementById("question-message");
 
     if (questionMessageEl) {
-        questionMessageEl.style.display = "none"; // ✅ Hide it safely
+        questionMessageEl.style.display = "none"; 
     } else {
-        console.error("❌ Error: Element #question-message not found.");
+        console.error("Error: Element #question-message not found.");
     }
 });
 
@@ -743,7 +706,7 @@ document.addEventListener("DOMContentLoaded", () => {
 function displayQuestion(category, difficulty) {
     let question = getRandomQuestion(category, difficulty);
     if (!question) {
-        console.error("❌ Error: No question retrieved.");
+        console.error("Error: No question retrieved.");
         return;
     }
 
@@ -764,19 +727,23 @@ function displayQuestion(category, difficulty) {
 // Handle clicking on a statement
 statementsContainerEl.addEventListener("click", (event) => {
     if (!currentQuestion) {
-        console.error("❌ Error: No question available.");
+        console.error("Error: No question available.");
         return;
     }
 
     if (event.target.tagName === "P") {
         const selectedText = event.target.textContent.trim().replace(/^\d+:\s*/, "");
 
+        // Count total selections made
+        totalChoices++;
+
         if (currentQuestion.truth.includes(selectedText)) {
             event.target.style.color = "green";
-            event.target.innerHTML += " ✅ Correct!";
+            event.target.innerHTML += " Correct!";
+            score++; // Increase score when correct
         } else if (selectedText === currentQuestion.lie) {
             event.target.style.color = "red";
-            event.target.innerHTML += " ❌ Wrong!";
+            event.target.innerHTML += " Wrong!";
             
             // Show correct explanation
             const explanationEl = document.createElement("p");
@@ -785,6 +752,9 @@ statementsContainerEl.addEventListener("click", (event) => {
             explanationEl.style.marginTop = "10px";
             statementsContainerEl.appendChild(explanationEl);
         }
+
+        // ✅ Update score display
+        scoreEl.textContent = `${score} out of ${totalChoices}`;
 
         // ✅ Show the Next Button
         nextButtonEl.style.display = "block";

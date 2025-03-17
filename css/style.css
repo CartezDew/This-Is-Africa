@@ -5,7 +5,7 @@ body {
   }
   
   body {
-    /* background-color:rgb(196, 164, 132); */
+    
     font-family: system-ui, sans-serif;
     text-align: center;
     margin: 0;
@@ -21,13 +21,13 @@ body {
   text-align: center; 
   font-size: 50px;
   font-weight: bold;
-  color: blacl; /* Adjust color as needed */
-  margin-top: 20px; /* Space from the top */
+  color: blacl; 
+  margin-top: 20px; 
   position: absolute;
-  top: 20px; /* Adjust position */
+  top: 20px; 
   left: 50%;
-  transform: translateX(-50%); /* Center it horizontally */
-  width: 100%; /* Ensures it spans the width */
+  transform: translateX(-50%); 
+  width: 100%; 
 }
 
 .container {
@@ -37,10 +37,10 @@ body {
   max-width: 1200px;
 }
 
-/* 📌 Left Side: Statements Section */
+
 .left {
   width: 40%;
-  background-color: rgba(210, 180, 140, 0.9); /* Tan background with transparency */
+  background-color: rgba(210, 180, 140, 0.9); /
   padding: 20px;
   border-radius: 15px;
   text-align: center;
@@ -66,12 +66,13 @@ h4#question-message {
   color: #444;
 }
 
-/* 📌 Statement Box */
 .statements-container {
   background-color: white;
   padding: 15px;
+  font-weight: bold;
   border-radius: 10px;
   margin-top: 20px;
+  border-radius: 8px;
   min-height: 200px;
   text-align: center;
   display: flex;
@@ -79,7 +80,7 @@ h4#question-message {
   justify-content: center;
 }
 
-/* 🎯 Next Button */
+
 #next-button {
   display: none;
   background-color: #333;
@@ -97,7 +98,7 @@ h4#question-message {
   background-color: black;
 }
 
-/* 📌 Right Side: Category & Difficulty Selection */
+
 .right {
   width: 40%;
   background-color: rgba(210, 180, 140, 0.9);
@@ -108,7 +109,7 @@ h4#question-message {
   min-height: 400px;
 }
 
-/* 🕒 Timer */
+
 #timer-container {
   font-size: 20px;
   font-weight: bold;
@@ -121,7 +122,6 @@ h4#question-message {
   text-align: center;
 }
 
-/* 🏆 Category & Difficulty Buttons */
 .category-button, .difficulty-button {
   padding: 10px 20px;
   margin: 10px;
@@ -133,27 +133,40 @@ h4#question-message {
   transition: all 0.3s ease;
 }
 
-/* 💡 Highlight selected category */
+
 .category-button.selected {
-  background-color: #8B4513; /* Dark brown */
+  background-color: #8B4513; 
   color: white;
   border: 2px solid black;
   font-weight: bold;
 }
 
-/* 💡 Highlight selected difficulty */
+
 .difficulty-button.selected {
-  background-color:#8B4513; /* Light tan */
+  background-color:#8B4513; 
   color: white;
   font-weight: bold;
   border: 2px solid black;
 }
 
-/* 📢 Message for selection */
 #selection-message {
   color: red;
   font-weight: bold;
   text-align: center;
   margin-top: 10px;
-  display: none; /* Initially hidden */
+  display: none; 
 }
+
+footer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 13%;
+  background-color: rgba(0, 0, 0, 0.7); 
+  color: white;
+  text-align: right; 
+  padding: 5px 10px;
+  font-size: 11px;
+  font-family: Arial, sans-serif;
+  min-height: 10px;
+};

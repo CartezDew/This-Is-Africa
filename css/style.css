@@ -13,18 +13,35 @@ body {
   justify-content: center;
   align-items: center;
 }
-
 .game-title {
   text-align: center;
   font-size: 50px;
   font-weight: bold;
-  color: blacl;
+  color: black;
   margin-top: 20px;
   position: absolute;
   top: 20px;
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
+}
+
+@media (max-width: 1200px) {
+  .game-title {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .game-title {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .game-title {
+    font-size: 24px;
+  }
 }
 
 .container {

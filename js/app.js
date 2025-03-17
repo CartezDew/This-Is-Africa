@@ -702,7 +702,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// Function to display a question
 function displayQuestion(category, difficulty) {
     let question = getRandomQuestion(category, difficulty);
     if (!question) {
@@ -710,21 +709,19 @@ function displayQuestion(category, difficulty) {
         return;
     }
 
-    currentQuestion = question; // Store globally for reference in event listeners
+    currentQuestion = question;
 
     // Shuffle and display statements
     let statements = [...question.truth, question.lie].sort(() => Math.random() - 0.5);
 
-    statementsContainerEl.innerHTML = `
-      <p class="statement">1: ${statements[0]}</p>
-      <hr>
-      <p class="statement">2: ${statements[1]}</p>
-      <hr>
-      <p class="statement">3: ${statements[2]}</p>
-    `;
+    statementsContainerEl.innerHTML = statements.map(statement => `
+        <p class="statement">${statement}</p>
+        <hr>
+    `).join('');
 }
 
-// Handle clicking on a statement
+
+
 statementsContainerEl.addEventListener("click", (event) => {
     if (!currentQuestion) {
         console.error("Error: No question available.");
@@ -732,22 +729,23 @@ statementsContainerEl.addEventListener("click", (event) => {
     }
 
     if (event.target.tagName === "P") {
-        const selectedText = event.target.textContent.trim().replace(/^\d+:\s*/, "");
+        const selectedText = event.target.textContent.trim();
 
-        // Count total selections made
         totalChoices++;
 
-        if (currentQuestion.truth.includes(selectedText)) {
+        if (selectedText === currentQuestion.lie) {
+            // ✅ Correct: Player selected the lie
             event.target.style.color = "green";
-            event.target.innerHTML += " Correct!";
-            score++; // Increase score when correct
-        } else if (selectedText === currentQuestion.lie) {
+            event.target.innerHTML += " ✅ Correct!";
+            score++;  // Increase score only when correct
+        } else {
+            // ❌ Wrong: Player selected a truth
             event.target.style.color = "red";
-            event.target.innerHTML += " Wrong!";
-            
-            // Show correct explanation
+            event.target.innerHTML += " ❌ Wrong";
+
+            // Show correct lie explanation
             const explanationEl = document.createElement("p");
-            explanationEl.textContent = `💡This is untrue! ${currentQuestion.explanation}`;
+            explanationEl.innerHTML = `<strong>💡 Correct Lie:</strong> "${currentQuestion.lie}". ${currentQuestion.explanation}`;
             explanationEl.style.color = "blue";
             explanationEl.style.marginTop = "10px";
             statementsContainerEl.appendChild(explanationEl);
@@ -756,7 +754,7 @@ statementsContainerEl.addEventListener("click", (event) => {
         // Update score display
         scoreEl.textContent = `${score} out of ${totalChoices}`;
 
-        // Show the Next Button
+        // Show Next button
         nextButtonEl.style.display = "block";
     }
 });
@@ -767,11 +765,7 @@ nextButtonEl.addEventListener("click", () => {
         return;
     }
 
-    // Load a new question
     displayQuestion(selectedCategory, selectedDifficulty);
-
-    // Hide the Next button again
     nextButtonEl.style.display = "none";
 });
-
 });

@@ -1,72 +1,5 @@
 body {
-    /* background-color: gainsboro; */
-    /* Use a system font, if none are available use an available sans-sarif */
-    /* font-family: system-ui, sans-serif;
-    margin: 0; */
-    /* text-align: center;
-    margin: 0;
-    padding: 0;
-    height: 100vh; */
-    /* background:
-        linear-gradient(to right, black 50%, transparent 50%), 
-        url("https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D") no-repeat;
-    background-size: cover; */
-/* 
-  }
 
-  .container {
-    display: center;
-    height: 100vh;
-  }
-
-.left, .right {
-    width: 100%;
-    height: 100%;
-}
-
-.left {
-    background-color:rgb(196, 164, 132);
-} */
-
-/* .square-box { */
-    /* width: 200px;  Adjust size as needed */
-    /* height: 200px; Keeps it square */
-    /* background-color: black;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-} */
-
-
-/*.right {
-    /* background: url("https://i.postimg.cc/G2Fxxwjs/Zebras.jpg");
-    background-size: fixed;
-} */
-/* 
-.spanning {
-    position: absolute;
-    width: 100%;
-    text-align: center;
-    left: 0;
-    top: 10%;
-} */
-
-  /* .board {
-    background: url("https://i.postimg.cc/HxMcmYyr/Africa-Safari-Background-Option-1.jpg") no-repeat;
-    background-size: cover;
-    display: flex;
-    flex-wrap: wrap;
-    width: 325px;
-  }
-
-  .sqr {
-    width: 30%;
-    aspect-ratio: 1/1;
-    border: 3px solid black;
-    font-size: 64px;
-    text-align: center;
-  }  */
   
     box-sizing: border-box;
   }
@@ -78,27 +11,149 @@ body {
     margin: 0;
     background-image: url("https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
     background-size: cover; 
-  }
-  .container {
-    display: center;
     height: 100vh;
-  }
-  #timer-container {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: white;
-    padding: 10px 15px;
-    font-size: 24px;
-    font-weight: bold;
-    color: black;
-    border-radius: 5px;
-    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-#question-message {
-  display: none;
+.game-title {
+  text-align: center; 
+  font-size: 50px;
+  font-weight: bold;
+  color: blacl; /* Adjust color as needed */
+  margin-top: 20px; /* Space from the top */
+  position: absolute;
+  top: 20px; /* Adjust position */
+  left: 50%;
+  transform: translateX(-50%); /* Center it horizontally */
+  width: 100%; /* Ensures it spans the width */
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  max-width: 1200px;
+}
+
+/* 📌 Left Side: Statements Section */
+.left {
+  width: 40%;
+  background-color: rgba(210, 180, 140, 0.9); /* Tan background with transparency */
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  min-height: 400px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.spanning h1 {
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.spanning h3 {
   font-size: 18px;
+  color: #555;
+}
+
+h4#question-message {
+  font-size: 25px;
   font-weight: bold;
   margin-top: 10px;
+  color: #444;
+}
+
+/* 📌 Statement Box */
+.statements-container {
+  background-color: white;
+  padding: 15px;
+  border-radius: 10px;
+  margin-top: 20px;
+  min-height: 200px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* 🎯 Next Button */
+#next-button {
+  display: none;
+  background-color: #333;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 15px;
+  transition: 0.3s ease;
+}
+
+#next-button:hover {
+  background-color: black;
+}
+
+/* 📌 Right Side: Category & Difficulty Selection */
+.right {
+  width: 40%;
+  background-color: rgba(210, 180, 140, 0.9);
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+  min-height: 400px;
+}
+
+/* 🕒 Timer */
+#timer-container {
+  font-size: 20px;
+  font-weight: bold;
+  color: black;
+  background-color: white;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border: 2px solid #444;
+  text-align: center;
+}
+
+/* 🏆 Category & Difficulty Buttons */
+.category-button, .difficulty-button {
+  padding: 10px 20px;
+  margin: 10px;
+  border-radius: 10px;
+  border: 2px solid #8B5E3C;
+  background-color: tan;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+/* 💡 Highlight selected category */
+.category-button.selected {
+  background-color: #8B4513; /* Dark brown */
+  color: white;
+  border: 2px solid black;
+  font-weight: bold;
+}
+
+/* 💡 Highlight selected difficulty */
+.difficulty-button.selected {
+  background-color:#8B4513; /* Light tan */
+  color: white;
+  font-weight: bold;
+  border: 2px solid black;
+}
+
+/* 📢 Message for selection */
+#selection-message {
+  color: red;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 10px;
+  display: none; /* Initially hidden */
 }

@@ -12,12 +12,15 @@ const easyButtonEl = document.querySelector("#easy-button");
 const mediumButtonEl = document.querySelector("#medium-button");
 const hardButtonEl = document.querySelector("#hard-button");
 const questionDisplayEl = document.querySelector("#question-display");
-const categoryButtons = document.querySelectorAll (".category-button");
-const difficultyButtons = document.querySelectorAll (".difficulty-button");
 const statementsContainerEl = document.querySelector(".statements-container");
 const nextButtonEl = document.querySelector("#next-button");
 const timerEl = document.querySelector("#timer");
 const countdownEl = document.getElementById("countdown"); 
+const selectionMessageEl = document.getElementById("selection-message"); // Message to select difficulty
+const categoryButtons = document.querySelectorAll(".category-button");
+    const difficultyContainer = document.getElementById("difficulty-container");
+    const difficultyButtons = document.querySelectorAll(".difficulty-button");
+   
 
 //variables stored
 
@@ -664,11 +667,16 @@ difficultyButtons.forEach(button => {
         selectedDifficulty = event.target.dataset.difficulty;
         console.log(`✅ Difficulty selected: ${selectedDifficulty}`);
 
+        // Remove previous selection highlights
         difficultyButtons.forEach(btn => btn.classList.remove("selected"));
+
+        // Highlight the selected difficulty
         event.target.classList.add("selected");
 
-        // ✅ Start timer when difficulty is chosen
         startTimer();
+
+        // ✅ Hide the selection message after difficulty is chosen
+        selectionMessageEl.style.display = "none";
 
         // ✅ Display the question
         displayQuestion(selectedCategory, selectedDifficulty);
@@ -797,4 +805,3 @@ nextButtonEl.addEventListener("click", () => {
 });
 
 });
-

@@ -2,7 +2,7 @@
 
 🖼️ Screenshot/Logo
 
-(https://i.postimg.cc/JnxhmjR4/temp-Image4u1yo0.avif)
+![image](https://i.postimg.cc/JnxhmjR4/temp-Image4u1yo0.avif)
 
 
 This is Africa! is an engaging and educational trivia game that tests your knowledge about African history, geography, and culture. Players choose a region (Africa, Rwanda, or South Africa) and a difficulty level (Easy, Medium, or Hard) to answer fun and challenging trivia questions. The game is designed to be both informative and entertaining, making it perfect for anyone looking to learn more about Africa in an interactive way.

@@ -736,7 +736,7 @@ statementsContainerEl.addEventListener("click", (event) => {
         if (selectedText === currentQuestion.lie) {
             // ✅ Correct: Player selected the lie
             event.target.style.color = "green";
-            event.target.innerHTML += " ✅ Correct!";
+            event.target.innerHTML += ` ✅ Correct! <span style="color: blue;">${currentQuestion.explanation}</span>`;
             score++;  // Increase score only when correct
         } else {
             // ❌ Wrong: Player selected a truth

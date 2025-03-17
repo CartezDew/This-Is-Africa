@@ -65,26 +65,26 @@ let africaEasyQuestions = {
 };
 let africaMediumQuestions = {
     true: [
-        "Africa has the youngest population in the world, with over 50% of the population under the age of 20",
+        "Africa has the youngest population in the world, with over 50% of the population under the age of 20.",
         "Africa is the cradle of humanity, with fossil evidence showing that modern humans first appeared there around 300,000 years ago.",
         "The oldest university in the world, Al-Qarawiyyin, was founded in 859 AD in Fez, Morocco.",
-        "Liberia was founded by freed African-American slaves in the 19th century",
-        "Africa produces 70% of the world's cocoa beans, mostly from Ivory Coast and Ghana",
-        "The Honey Badger is known for being one of the toughest animals in Africa",
-        "'Young, Famous & African' is Netflix's first reality series featuring an all-African cast",
-        "The majority of the Netflix series  'Young, Famous & African' was filmed in Johannesburg, South Africa",
-        "Sudan has more pyrmaids than Egypt",
+        "Liberia was founded by freed African-American slaves in the 19th century.",
+        "Africa produces 70% of the world's cocoa beans, mostly from Ivory Coast and Ghana.",
+        "The Honey Badger is known for being one of the toughest animals in Africa.",
+        "'Young, Famous & African' is Netflix's first reality series featuring an all-African cast.",
+        "The majority of the Netflix series  'Young, Famous & African' was filmed in Johannesburg, South Africa.",
+        "Sudan has more pyrmaids than Egypt.",
         "Africa is the only continent that stretches across all four hemispheres.",
         "Bob Marley performed at Zimbabwe's Independence Day celebration ",
         "In the DRC, only 1.8% of existing roads are tarred and less than 10% of the population has access to electricity today.",
-        "The Congo River is the deepest river in the world",
+        "The Congo River is the deepest river in the world.",
         "Some areas, like Lesotho and parts of South Africa, experience snow during winter!",
         "The Zulu tribe in South Africa is one of the largest ethnic groups on the continent.",
         "Zambia and Zimbabwe share one of the world's largest waterfalls, Victoria Falls.",
-        "The cheetah, found in Africa, is the fastest land animal",
+        "The cheetah, found in Africa, is the fastest land animal.",
         "Ethiopia is one of the few African countries that was never colonized.",
-        "The Netflix series, 'Young, Famous & African', features cast members from multiple African countries, including South Africa, Nigeria, and Tanzania",
-        "The Netflix series, 'Young, Famous & African', gives insight into the luxurious lifestyles of African entertainers and influencers",
+        "The Netflix series, 'Young, Famous & African', features cast members from multiple African countries, including South Africa, Nigeria, and Tanzania.",
+        "The Netflix series, 'Young, Famous & African', gives insight into the luxurious lifestyles of African entertainers and influencers.",
         "As of 2024, Cairo Egypt is the largest populated City in Africa.",
         "Djibouti has one of the saltiest bodies of water in the world, Lake Assal.",
         "The DRC was formerly known as Zaire and underwent a complex history, including colonial rule by Belgium, independence in 1960, and subsequent name changes.",
@@ -98,7 +98,7 @@ let africaMediumQuestions = {
         "Africa countries have never had a female president as a head of state.",
         "The show primarily follows the lives of business moguls and political leaders in Africa.",
         "All cast members are originally from South Africa.",
-        "Africa is the driest continent in the world. ",
+        "Africa is the driest continent in the world.",
         "All African countries gained independence in the 1800s.",
         "There are no penguins in Africa",
         "Nigeria hosts the United Nations' largest peacekeeping mission in the world, with over 21,000 soldiers from approximately 50 different countries.",
@@ -109,11 +109,11 @@ let africaMediumQuestions = {
         "Mount Everest is in Asia; Africa's highest peak is Mount Kilimanjaro.",
         "African is not a language. Africa is home to over 2,000 languages, making it the most linguistically diverse continent.",
         "False! Several African countries have had female presidents, including Ellen Johnson Sirleaf of Liberia, the first female African head of state.",
-        "Lie - The show focuses on African celebrities, entertainers, and influencers, not business or political figures",
+        "Lie - The show focuses on African celebrities, entertainers, and influencers, not business or political figures.",
         "Lie- The show includes stars from multiple countries like Nigeria, Uganda, and Tanzania.",
         "While Africa experiences significant water scarcity and desertification, it's not the driest continent globally; Antarctica is considered the driest continent.",
         "Most African nations gained independence in the mid-20th century, not the 1800s.",
-        "Penguins do live in Africa- mainly off the coasts of southern Africa and nearby islands. Unfortunately, the species is on the brink of extinction. ",
+        "Penguins do live in Africa- mainly off the coasts of southern Africa and nearby islands. Unfortunately, the species is on the brink of extinction.",
         "The Democratic Republic of the Congo hosts the United Nations' largest peacekeeping mission in the world, with over 21,000 soldiers from approximately 50 different countries.",
     ],
 };
@@ -131,7 +131,7 @@ let rwandaEasyQuestions = {
         "Rwanda's climate is tropical but modified by its high elevation, making it cooler than other equatorial countries.",
         "Umuganda, a nationwide community service day, takes place on the last Saturday of every month.",
         "Rwanda's population is made up mostly of Hutus and Tutsis.",
-        "Paul Kagame is a Rwandan politician and former military officer who has been the President of Rwanda since 2000",
+        "Paul Kagame is a Rwandan politician and former military officer who has been the President of Rwanda since 2000.",
         "Tourism is one of Rwanda's fastest-growing industries, particularly gorilla trekking.",
         "The country's economic growth rate has been one of the highest in Africa in recent years.",
         "Rwanda's education system includes instruction in multiple languages.",
@@ -285,7 +285,7 @@ let southAfricaMediumQuestions = {
         "The Kalahari Desert spans the entire northern border of South Africa.",
         "English is the most widely spoken home language in South Africa.",
         "Education is compulsory only up to the age of 16.",
-        "Vusi Sidney Mahlasela Ka Zwane (born 1965) is a legendary, Zulu South African singer-songwriter, born in Cape Town. ",
+        "Vusi Sidney Mahlasela Ka Zwane (born 1965) is a legendary, Zulu South African singer-songwriter, born in Cape Town.",
         "The show primarily follows the lives of business moguls and political leaders in Africa.",
         "All cast members are originally from South Africa.",  
     ],
@@ -753,10 +753,10 @@ statementsContainerEl.addEventListener("click", (event) => {
             statementsContainerEl.appendChild(explanationEl);
         }
 
-        // ✅ Update score display
+        // Update score display
         scoreEl.textContent = `${score} out of ${totalChoices}`;
 
-        // ✅ Show the Next Button
+        // Show the Next Button
         nextButtonEl.style.display = "block";
     }
 });

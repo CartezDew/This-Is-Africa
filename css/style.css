@@ -1,48 +1,75 @@
-body {
-  box-sizing: border-box;
+:root {
+  --title-min-gap: 30px; /* Minimum gap between title and elements below */
+  --title-max-font: 4vw; /* Maximum title font size */
+  --title-min-font: 2vw; /* Minimum title font size */
 }
 
 body {
+  box-sizing: border-box;
   font-family: system-ui, sans-serif;
   text-align: center;
-  margin: 0;
+  margin: 1;
   background-image: url("https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
   background-size: cover;
-  background-repeat: no-repeat;  
-  background-position: center; 
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 20px; 
+  margin-top: 60px;
+}
+
+/* Title container to maintain spacing */
+.title-container {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-.game-title {
-  text-align: center;
-  font-size: 5vw; 
-  font-weight: bold;
-  color: black;
-  position: absolute;
-  top: 5%;
-  left: 50%;
-  transform: translate(-50%, -5%);
-  width: max-content; /* Ensures the title does not take the full width */
-  white-space: nowrap;
+  width: 100%;
+  min-height: calc(var(--title-min-font) + var(--title-min-gap)); 
+  padding-top: 40px;
 }
 
+.game-title {
+  margin-bottom: 100px; 
+}
+
+/* Game title styling */
+.game-title {
+  font-size: clamp(var(--title-min-font), 3vw, var(--title-max-font)); /* Shrinks dynamically */
+  max-width: 80%;
+  text-align: center;
+  font-weight: bold;
+  color: black;
+  margin: 0 auto;
+  padding: 10px;
+  transition: font-size 0.3s ease;
+}
+
+
+#selection-message,
+#timer-container {
+  margin-top: var(--title-min-gap);
+}
+
+/* Responsive font scaling */
 @media (max-width: 1200px) {
   .game-title {
-    font-size: 4.5vw;
+    font-size: clamp(2vw, 3.5vw, 3.8vw);
   }
 }
 
 @media (max-width: 768px) {
   .game-title {
-    font-size: 6vw;
+    font-size: clamp(1.8vw, 3vw, 3.5vw);
+    max-width: 90%;
   }
 }
 
 @media (max-width: 480px) {
   .game-title {
-    font-size: 7vw;
+    font-size: clamp(1.5vw, 2.5vw, 3vw);
+    max-width: 95%;
   }
 }
 
@@ -51,13 +78,14 @@ body {
   justify-content: space-between;
   width: 90%;
   max-width: 1200px;
+  padding: 70px;
 }
 
 .left {
-  width: 40%;
+  width: 36%;
   background-color: rgba(210, 180, 140, 0.9);
-  padding: 20px;
-  border-radius: 15px;
+  padding: 10px;
+  border-radius: 20px;
   text-align: center;
   min-height: 400px;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
@@ -113,7 +141,7 @@ h4#question-message {
 }
 
 .right {
-  width: 40%;
+  width: 36%;
   background-color: rgba(210, 180, 140, 0.9);
   padding: 20px;
   border-radius: 15px;

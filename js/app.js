@@ -110,7 +110,7 @@ let africaMediumQuestions = {
         "African is not a language. Africa is home to over 2,000 languages, making it the most linguistically diverse continent.",
         "Several African countries have had female presidents, including Ellen Johnson Sirleaf of Liberia, the first female African head of state.",
         "The show focuses on African celebrities, entertainers, and influencers, not business or political figures.",
-        "The show includes stars from multiple countries like Nigeria, Uganda, and Tanzania.",
+        "Lie- The show includes stars from multiple countries like Nigeria, Uganda, and Tanzania.",
         "While Africa experiences significant water scarcity and desertification, it's not the driest continent globally; Antarctica is considered the driest continent.",
         "Most African nations gained independence in the mid-20th century, not the 1800s.",
         "Penguins do live in Africa- mainly off the coasts of southern Africa and nearby islands. Unfortunately, the species is on the brink of extinction.",
@@ -702,6 +702,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
+let hasSelected = false; // Track if the player has already made a selection
+
 function displayQuestion(category, difficulty) {
     let question = getRandomQuestion(category, difficulty);
     if (!question) {
@@ -710,38 +712,46 @@ function displayQuestion(category, difficulty) {
     }
 
     currentQuestion = question;
+    hasSelected = false; // Reset selection for the new question
 
-    // Shuffle and display statements
-    let statements = [...question.truth, question.lie].sort(() => Math.random() - 0.5);
+    // Prepare an array of statements with numbering
+    let statementsArray = [
+        { text: question.truth[0], originalIndex: 0 },
+        { text: question.truth[1], originalIndex: 1 },
+        { text: question.lie, originalIndex: 2 }
+    ];
 
-    statementsContainerEl.innerHTML = statements.map(statement => `
-        <p class="statement">${statement}</p>
+    // Shuffle the array while keeping track of original indices
+    statementsArray.sort(() => Math.random() - 0.5);
+
+    // Display shuffled, but still numbered, statements
+    statementsContainerEl.innerHTML = statementsArray.map((statement, index) => `
+        <p class="statement" data-original-index="${statement.originalIndex}">${index + 1}. ${statement.text}</p>
         <hr>
     `).join('');
 }
 
-
-
+// Ensure player can only select **ONE** statement per round
 statementsContainerEl.addEventListener("click", (event) => {
-    if (!currentQuestion) {
-        console.error("Error: No question available.");
-        return;
+    if (!currentQuestion || hasSelected) {
+        return; // Prevent further selections
     }
 
     if (event.target.tagName === "P") {
+        hasSelected = true; // Lock selection after first click
         const selectedText = event.target.textContent.trim();
 
         totalChoices++;
 
-        if (selectedText === currentQuestion.lie) {
+        if (selectedText.includes(currentQuestion.lie)) {
             // ✅ Correct: Player selected the lie
             event.target.style.color = "green";
-            event.target.innerHTML += ` ✅ Correct! <span style="color: blue;">${currentQuestion.explanation}</span>`;
+            event.target.innerHTML += ` ✅ <span style="color: blue;">${currentQuestion.explanation}</span>`;
             score++;  // Increase score only when correct
         } else {
             // ❌ Wrong: Player selected a truth
             event.target.style.color = "red";
-            event.target.innerHTML += " ❌ Wrong";
+            event.target.innerHTML += " ❌";
 
             // Show correct lie explanation
             const explanationEl = document.createElement("p");
@@ -759,12 +769,14 @@ statementsContainerEl.addEventListener("click", (event) => {
     }
 });
 
+// Reset selection when moving to the next question
 nextButtonEl.addEventListener("click", () => {
     if (!selectedCategory || !selectedDifficulty) {
         console.error("Error: Category or difficulty not selected.");
         return;
     }
 
+    hasSelected = false; // Reset selection for the new question
     displayQuestion(selectedCategory, selectedDifficulty);
     nextButtonEl.style.display = "none";
 });

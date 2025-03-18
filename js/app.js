@@ -325,7 +325,7 @@ let southAfricaHardQuestions = {
         "Unlike many countries, South Africa has strict banking regulations, which helped it avoid the 2008 global banking crisis.",
         "South Africa enforces a 'shoot-to-kill' policy against poachers in some areas.",
         "The Democratic Alliance (DA) is South Africa's second-largest political party and traces its roots to the anti-apartheid movement.",
-        "South Africa has 11 official languages, making it one of the most linguistically diverse countries in the world.",
+        "South Africa has 12 official languages, making it one of the most linguistically diverse countries in the world.",
         "Khayelitsha Cookies is a social enterprise that empowers women by giving them employment in baking.",
         "Noble Hill is one of only 11 organic wine farms in South Africa.",
         "Workshop 17 is a co-working space designed to support innovation and entrepreneurship in South Africa.",
